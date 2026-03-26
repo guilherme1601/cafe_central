@@ -1,9 +1,14 @@
+/* configurações gerais */
+
 body {
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
     color: rgb(24, 24, 24);
     background-color: rgb(252, 252, 252);
+}
+body, html {
+    height: 100%;
 }
 
 h1, h2, h3 {
@@ -14,16 +19,20 @@ h1, h2, h3 {
 p {
     line-height: 1.5;
     margin: 10px 0;
+    text-align: center;
 }
+
+/* cabeçalho e menu */
 
 header {
     background-color: rgba(214, 151, 16, 0.815);
     color: rgb(0, 0, 0);
     padding: 29px 0;
 }
+
 .logo a {
     text-decoration: none;
-    color: rgb(0, 0, 0);
+    color: #ffff;
     font-size: 25px;
     font-weight: bold;
 }
@@ -31,7 +40,7 @@ header {
 .logo span{
     color: rgba(177, 136, 3, 0.788)
 }
-
+/* Acessando a Tag.Class*/
 nav.menu{
     text-align: center;
     margin-top: 10px;
@@ -44,14 +53,19 @@ nav.menu a{
     font-weight: bold;
 }
 
-nav.menu a:houver{
+nav.menu a.ativo {
+    color: rgba(177, 136, 3, 0.788);
+    text-decoration: underline;
+}
+
+nav.menu a:hover{
     color: rgba(177, 136, 3, 0.788)
 }
 
 .hero{
     background-color: white;
     text-align: center;
-    padding: 60px 25 px;
+    padding: 60px 25px;
 }
 
 .hero h1{
@@ -63,6 +77,8 @@ nav.menu a:houver{
     font-size: 18px;
     margin-bottom: 20px;
 }
+
+/* Criando botões com hiperlinks */
 
 .btn-primario {
     background-color: rgba(177, 136, 3, 0.788);
@@ -85,6 +101,48 @@ nav.menu a:houver{
     opacity: 1.0;
 }
 
+/*pagina cardapio*/
+
+.cardapio {
+    gap: 30px 20px;
+    text-align: center;
+    display: flex;
+}
+
+.cardapio {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    background-color: #ffff;
+    border-radius: 8px;
+    box-shadow: none;
+    text-decoration: none;
+    color: inherit;
+    transition: 0.2s;
+}
+
+.cardapio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
+    gap: 15px;
+    align-items: stretch;
+}
+
+.cardapio:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 14px rgb(24, 24, 24);
+}
+
+.cardapio img {
+    width: 100%;
+    height: 140px;
+    object-fit: contain;
+    background-color: white;
+    border-radius: 6px;
+}
+
+/*rodape*/
+
 footer{
     background-color: rgba(214, 151, 16, 0.815);
     color: white;
@@ -95,4 +153,16 @@ footer{
 footer a{
     color: rgba(177, 136, 3, 0.788);
     text-decoration: none;
+}
+
+.contato {
+    padding: 40px 20px;
+}
+
+.contato form {
+    max-width: 500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
