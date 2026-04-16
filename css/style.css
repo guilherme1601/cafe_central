@@ -120,10 +120,10 @@ nav.menu a:hover {
 /* cardápio */
 
 .cardapio-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 15px;
-    padding: 20px;
+    display: flex;          /* coloca os cards lado a lado */
+    gap: 20px;              /* espaço entre os cards */
+    flex-wrap: wrap;        /* permite quebrar linha se faltar espaço */
+    justify-content: center;/* centraliza os cards no container */
 }
 
 .cardapio {
@@ -142,12 +142,17 @@ nav.menu a:hover {
     box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
 }
 
-.cardapio img {
+.produto img {
     width: 100%;
     height: 140px;
     object-fit: contain;
     background-color: white;
     border-radius: 6px;
+}
+
+.produto:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
 }
 
 /* contato */
@@ -196,4 +201,12 @@ form input, form textarea {
     flex-direction: column;
     gap: 15px;
     padding: 40px 20px;
+}
+
+.produto {
+    background-color: #ffffff;      /* fundo branco */
+    padding: 20px;                  /* espaço interno */
+    border-radius: 8px;             /* cantos arredondados */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.08); /* sombra suave */
+    flex: 1 1 250px;  
 }
