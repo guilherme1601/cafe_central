@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="Café Central." >
-        <link rel="stylesheet" href="../css/style.css">
-        <title>Café Central - o melhor café da região</title>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Café Central.">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Café Central - o melhor café da região</title>
+</head>
 
-    <body>
-        <header class="topo"> <!-- Cabeçalho do Site -->
+<body>
+    <header class="topo">
         <div class="logo">
             <a href="../index.html">Café<span>Central</span></a>
         </div>
@@ -19,28 +19,53 @@
             <a href="../pages/contato.html">Contato</a> 
             <a href="../pages/login.html">Login</a>
             <a href="../pages/cadastro.html">Cadastro</a>
-            <a href="../pages/cardapio.html">Cardapio</a>
         </nav>
     </header>
-    
-    <section class="hero">
-        <div class="container hero-content">
-            <h1>Um dos melhores cafés da nossa região</h1>
-            <div class="hero-actions">
-                <a href="../pages/contato.html" class="btn btn-secondary">Fale conosco</a>
+
+    <main>
+        <!-- HERO -->
+        <section class="hero">
+            <div class="container hero-content">
+                <h1>Um dos melhores cafés da nossa região</h1>
+                <div class="hero-actions">
+                    <a href="../pages/contato.html" class="btn-primario">Fale conosco</a>
+                </div>
             </div>
-        
-        </div>
-    </section>
+        </section>
+
+        <!-- DESTAQUES -->
+        <section class="destaques-home">
+            <h2>Por que escolher o Café Central?</h2>
+
+            <div class="destaques-grid">
+                <div class="destaque">
+                    <h3> Qualidade</h3>
+                    <p>Cafés selecionados com o melhor sabor.</p>
+                </div>
+
+                <div class="destaque">
+                    <h3> Ambiente</h3>
+                    <p>Espaço confortável para relaxar ou estudar.</p>
+                </div>
+
+                <div class="destaque">
+                    <h3> Rapidez</h3>
+                    <p>Atendimento ágil para o seu dia a dia.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta">
+            <h2>Venha nos visitar!</h2>
+            <p>Estamos abertos todos os dias das 08h às 22h.</p>
+        </section>
+    </main>
 
     <footer class="rodape">
-            <p>®2026 Café Central. Todos os Direitos Reservados</p>
-            <p><a href="../pages/contato.html">Entre em Contato</a></p>
-        </footer>
+        <p>®2026 Café Central. Todos os Direitos Reservados</p>
+        <p><a href="../pages/contato.html">Entre em Contato</a></p>
+    </footer>
 
     <script src="../js/script.js"></script>
-    </body>
+</body>
 </html>
-
-const [rows] = await pool.execute(
-            "SELECT id FROM tb_usuarios(nome,email,senha) VALUES(?,?,?)",

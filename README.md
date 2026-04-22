@@ -40,7 +40,7 @@ Projeto preparado para separação entre HTML, CSS e JavaScript
 
 Estrutura técnica definida e organizada:
 Diretórios criados:
-/css 3 arquivos de estilo (layout e identidade visual)
+/css 2 arquivos de estilo (layout e identidade visual)
 /js 3 scripts JavaScript (interações futuras)
 /img 3 imagens dos produtos da loja
 /pages 3 páginas internas do site

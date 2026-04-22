@@ -104,6 +104,34 @@ app.post("/login", async (req,res) => {
             email: usuario.email
         }
 
-        res.json
+        res.json({mensagem:"Login realizado com sucesso!"});
+    } catch(error){
+        console.error(error);
+        res.status(500).json({erro: "Erro ao fazer login"})
     }
 })
+
+app.get("/me",(req, res) =>{
+    if(!req.session.usuario){
+        return res.status(401).json({logado:false})
+    }
+
+    res.json({
+        logado:true;
+        usuario: req.session.usuario
+    })
+});
+
+app.post("/logout", (req, res) => {
+    req.session.destroy(() => {
+        res.clearCookie("cafecentral.sid")
+        res.json({mensagem: "Logout realizado"});
+
+        });
+});
+
+app.listen(3000, () => {
+    console.log("Servidor rodando em http://localhost:3000")
+});
+
+
