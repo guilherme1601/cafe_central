@@ -1,35 +1,67 @@
-
 <!DOCTYPE html>
 <html>
+
     <head>
+        <!-- Título da aba do navegador -->
         <title>Cardápio</title>
+
+        <!-- Permite usar acentos corretamente -->
         <meta charset="UTF-8">
+
+        <!-- Deixa o site responsivo (funciona bem no celular) -->
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Importa o CSS principal -->
         <link rel="stylesheet" href="../css/style.css">
     </head>
 
     <body>
-        <!-- Cabeçalho reutilizado -->
-         <header class="topo"> 
+
+        <!-- ================= CABEÇALHO ================= -->
+        <header class="topo"> 
+
+            <!-- Logo do site -->
             <div class="logo">
                 <a href="../index.html">Café<span>Central</span></a>
             </div>
+
+            <!-- Menu de navegação -->
             <nav class="menu">
                 <a href="../index.html">Início</a>
                 <a href="../pages/sobre.html">Sobre</a>
+
+                <!-- Página atual com classe ativa -->
                 <a href="../pages/cardapio.html" class="ativo">Cardápio</a>
+
                 <a href="../pages/contato.html">Contato</a>
+                <a href="../pages/login.html">Login</a>
             </nav>
-         </header>
+        </header>
 
+        <!-- ================= CONTEÚDO PRINCIPAL ================= -->
         <main>
-            <section class="Cardapio">
-                <h2>Cardápio do Café Central</h2>
-                <p>Sabores quentes e fresquinhos para começar bem o dia. Aproveite nossos cafés especiais, lanches artesanais e opções de acompanhamento.</p>
 
+            <!-- Seção do cardápio -->
+            <section class="Cardapio">
+
+                <!-- Título da seção -->
+                <h2>Cardápio do Café Central</h2>
+
+                <!-- Descrição -->
+                <p>
+                    Sabores quentes e fresquinhos para começar bem o dia. 
+                    Aproveite nossos cafés especiais, lanches artesanais e opções de acompanhamento.
+                </p>
+
+                <!-- Container dos produtos -->
                 <div class="cardapio-grid">
+
+                    <!-- Produto 1 -->
                     <article class="produto">
+                        <!-- Imagem -->
                         <img src="../img/cafee.png" alt="Café Espresso">
+
+                        <!-- Conteúdo do produto -->
                         <div class="content">
                             <h3>Expresso Clássico</h3>
                             <p>Intenso, encorpado e preparado com grãos selecionados para um sabor marcante.</p>
@@ -37,6 +69,7 @@
                         </div>
                     </article>
 
+                    <!-- Produto 2 -->
                     <article class="produto">
                         <img src="../img/pao.jpg" alt="Pão Francês">
                         <div class="content">
@@ -46,50 +79,58 @@
                         </div>
                     </article>
 
+                    <!-- Produto 3 -->
                     <article class="produto">
                         <img src="../img/queijopao.jpg" alt="Pão de queijo">
                         <div class="content">
                             <h3>Pão de Queijo Artesanal</h3>
-                            <p>Recheado com queijo especial e assado na hora, mais sabor para o seu café.</p>
+                            <p>Recheado com queijo especial e assado na hora.</p>
                             <strong>R$: 0,99</strong>
                         </div>
                     </article>
 
+                    <!-- Produto 4 -->
                     <article class="produto">
                         <img src="../img/cafee.png" alt="Café com leite">
                         <div class="content">
                             <h3>Café com Leite</h3>
-                            <p>Equilíbrio perfeito entre café espresso e leite vaporizado, suave e cremoso.</p>
+                            <p>Equilíbrio entre café espresso e leite vaporizado.</p>
                             <strong>R$: 6,49</strong>
                         </div>
                     </article>
 
+                    <!-- Produto 5 -->
                     <article class="produto">
                         <img src="../img/pao.jpg" alt="Torrada com manteiga">
                         <div class="content">
                             <h3>Torrada com Manteiga</h3>
-                            <p>Fatias douradas servidas com manteiga artesanal, simples e deliciosa.</p>
+                            <p>Fatias douradas com manteiga artesanal.</p>
                             <strong>R$: 2,49</strong>
                         </div>
                     </article>
 
+                    <!-- Produto 6 -->
                     <article class="produto">
                         <img src="../img/queijopao.jpg" alt="Café gelado">
                         <div class="content">
                             <h3>Café Gelado</h3>
-                            <p>Perfeito para dias quentes, com café filtrado e gelo crocante.</p>
+                            <p>Ideal para dias quentes, com gelo crocante.</p>
                             <strong>R$: 7,49</strong>
                         </div>
                     </article>
+
                 </div>
             </section>
         </main>
 
-        <!-- Rodapé reutilizado -->
+        <!-- ================= RODAPÉ ================= -->
         <footer class="rodape">
             <p>® 2026 Café Central. Todos os Direitos Reservados</p>
             <p><a href="../pages/contato.html">Entre em Contato</a></p>
         </footer>
-        <script src="js/script.js"></script>
+
+        <!-- Conecta o JavaScript -->
+        <script src="../js/script.js"></script>
+
     </body>
 </html>

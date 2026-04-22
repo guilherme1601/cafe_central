@@ -1,30 +1,50 @@
-const ListaCardapio = document.querySelector("#ListaCardapio"); /*onde os cards do cardapio vão aparecer*/
-const BuscaCardapio = document.querySelector("#BuscaCardapio")  /*campo de busca*/
+// Seleciona o elemento onde os produtos do cardápio vão aparecer
+const ListaCardapio = document.querySelector("#ListaCardapio");
 
-let cardapio = []   /*criando lista vazia para guardar o cardapio*/
+// Seleciona o campo de busca
+const BuscaCardapio = document.querySelector("#BuscaCardapio");
 
- async function carregarCardapio{
+// Cria um array vazio para armazenar os dados do cardápio
+let cardapio = [];
+
+// Função assíncrona para carregar o JSON
+async function carregarCardapio() {
+    // Faz uma requisição para pegar o arquivo JSON
     const resposta = await fetch("../data/cardapio.json");
-    cardapio = await resposta.json(); /* transforma o json em dados que o js entende */
-    renderizarCardapio(cardapio);
-};
 
-function renderizarCardapio(lista){
-    ListaCardapio.innerHTML = ""; /* InnerHTML coloca um codigo html dentro de algo*/
-    lista.forEach(cardapio => {
+    // Converte o JSON em objeto JavaScript
+    cardapio = await resposta.json();
+
+    // Chama a função para exibir os dados na tela
+    renderizarCardapio(cardapio);
+}
+
+// Função responsável por mostrar os itens na tela
+function renderizarCardapio(lista) {
+    // Limpa o conteúdo antes de renderizar novamente
+    ListaCardapio.innerHTML = "";
+
+    // Percorre cada item da lista
+    lista.forEach(item => {
+
+        // Cria uma div para cada produto
         const card = document.createElement("div");
+
+        // Adiciona uma classe para estilização
         card.classList.add("card");
+
+        // Insere o conteúdo HTML dentro do card
         card.innerHTML = `
-        <img scr="${cardapio.img}" width"100" height"140">
-        <h3> ${cardapio.titulo} </h3>
-        <p> ${cardapio.desc}</p>
-        <p> <strong>preco: </strong> ${cardapio.preco} </p>
+        <img src="${item.img}" width="100" height="140">
+        <h3>${item.titulo}</h3>
+        <p>${item.desc}</p>
+        <p><strong>Preço:</strong> ${item.preco}</p>
         `;
 
+        // Adiciona o card dentro da lista na página
         ListaCardapio.appendChild(card);
     });
+}
 
-};
-
+// Chama a função para carregar o cardápio ao iniciar a página
 carregarCardapio();
-
