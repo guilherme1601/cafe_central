@@ -124,7 +124,7 @@ app.post("/login", async (req, res) => {
     // retorna erro 400 (requisição inválida)
     const [rows] = await pool.execute(
   
-    "SELECT id, nome, email, senha FROM usuario WHERE email = ?", [email]
+    "SELECT id, nome, email, senha FROM tb_usuario WHERE email = ?", [email]
     );
     if (rows.length === 0)
     // nenhum usuário encontrado com esse e-mail
@@ -144,7 +144,8 @@ app.post("/login", async (req, res) => {
     email: usuario.email // e-mail para referência futura
     };
     res.json({ mensagem: "Login realizado com sucesso." });
-    } catch {
+    } catch(error) {
+        console.error(error)
     res.status(500).json({ erro: "Erro ao fazer login." });
     }
 });
