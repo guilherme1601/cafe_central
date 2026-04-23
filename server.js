@@ -176,6 +176,33 @@ app.post("/logout", (req, res) => { // rota POST 4 o front chama para deslogar
         process.env.PORT || 3000, () => console.log("Servidor rodando")
         );
 
+
+
+
+app.post("/post", (req,res) => {
+    // 7. req.body contém os dados envciados pelo form(nome,email,mensagem)
+    try{
+        const nome = req.body.nome
+        const email = req.body.email
+        const mensagem = req.body.mensagem
+                
+        if(!nome || !email || !mensagem){
+        // codigo 400 - requisição inválida
+            return res.status(400).json({mensagem: "Preecha todos os campos"});
+            };
+        
+            pool.execute("INSERT INTO tb_mensagem(nome,email,mensagem) VALUES(?,?,?)", [nome,email,mensagem]);
+            // codigo 201 - criado com sucesso
+            res.status(201).json({mensagem: "Mensagem enviada com sucesso!"});
+        
+                // 8. Envia uma resposta de volta para o navegador
+            res.send("Mensagem recebida com sucesso!");
+            } catch(error){
+                console.error(error);
+            }
+        });
+
+
 // ================= SERVIDOR =================
 
 app.listen(3000, () => {

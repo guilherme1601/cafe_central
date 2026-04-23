@@ -1,5 +1,7 @@
 // Pega o formulário pelo ID
 const form = document.getElementById("formContato");
+//const API_URL = "http://localhost:3000"
+const API_URL = "https://cafe-central-rb0q.onrender.com"
 
 // Escuta o evento de envio do formulário
 form.addEventListener("submit", async function(event){
@@ -15,7 +17,7 @@ form.addEventListener("submit", async function(event){
 
     try {
         // Envia os dados para um servidor (ou arquivo fake/API)
-        const resposta = await fetch("https://jsonplaceholder.typicode.com/posts", {
+        const resposta = await fetch(`${API_URL}/post`, {
             method: "POST", // tipo de envio
             headers: {
                 "Content-Type": "application/json" // diz que é JSON
@@ -33,7 +35,7 @@ form.addEventListener("submit", async function(event){
 
     } catch (erro) {
         // Caso dê erro
-        console.error("Erro:", erro);
+        console.error(erro);
         alert("Erro ao enviar mensagem!");
     }
 });
