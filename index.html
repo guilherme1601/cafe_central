@@ -2,108 +2,89 @@
 <html>
 
 <head>
-    <!-- Permite acentos (UTF-8) -->
     <meta charset="UTF-8">
-
-    <!-- Faz o site funcionar bem em celular -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Descrição do site (SEO / Google) -->
     <meta name="description" content="Café Central.">
 
-    <!-- Importa o CSS -->
-    <link rel="stylesheet" href="../css/style.css">
+    <!-- ✅ caminho correto -->
+    <link rel="stylesheet" href="css/style.css">
 
-    <!-- Título da aba -->
     <title>Café Central - o melhor café da região</title>
 </head>
 
 <body>
 
-    <!-- ================= CABEÇALHO ================= -->
-    <header class="topo">
+<header class="topo">
 
-        <!-- Logo -->
-        <div class="logo">
-            <a href="../index.html">Café<span>Central</span></a>
+    <div class="logo">
+        <!-- ✅ corrigido -->
+        <a href="index.html">Café<span>Central</span></a>
+    </div>
+
+    <nav class="menu">
+        <!-- ✅ corrigido -->
+        <a href="index.html" class="ativo">Início</a>
+        <a href="pages/sobre.html">Sobre</a>
+        <a href="pages/contato.html">Contato</a> 
+        <a href="pages/login.html">Login</a>
+        <a href="pages/cardapio.html">Cardápio</a>
+    </nav>
+</header>
+
+<main>
+
+    <section class="hero">
+        <div class="container hero-content">
+
+            <h1>Um dos melhores cafés da nossa região</h1>
+
+            <div class="hero-actions">
+                <!-- ✅ corrigido -->
+                <a href="pages/contato.html" class="btn-primario">
+                    Fale conosco
+                </a>
+            </div>
+
         </div>
+    </section>
 
-        <!-- Menu de navegação -->
-        <nav class="menu">
-            <a href="../index.html" class="ativo">Início</a> <!-- página atual -->
-            <a href="../pages/sobre.html">Sobre</a>
-            <a href="../pages/contato.html">Contato</a> 
-            <a href="../pages/login.html">Login</a>
-            <a href="../pages/cardapio.html">Cardapio</a>
-        </nav>
-    </header>
+    <section class="destaques-home">
 
-    <!-- ================= CONTEÚDO ================= -->
-    <main>
+        <h2>Por que escolher o Café Central?</h2>
 
-        <!-- HERO (parte principal do topo) -->
-        <section class="hero">
-            <div class="container hero-content">
+        <div class="destaques-grid">
 
-                <!-- Título principal -->
-                <h1>Um dos melhores cafés da nossa região</h1>
-
-                <!-- Botão -->
-                <div class="hero-actions">
-                    <a href="../pages/contato.html" class="btn-primario">
-                        Fale conosco
-                    </a>
-                </div>
-
+            <div class="destaque">
+                <h3>Qualidade</h3>
+                <p>Cafés selecionados com o melhor sabor.</p>
             </div>
-        </section>
 
-        <!-- ================= DESTAQUES ================= -->
-        <section class="destaques-home">
-
-            <!-- Título da seção -->
-            <h2>Por que escolher o Café Central?</h2>
-
-            <!-- Cards de destaque -->
-            <div class="destaques-grid">
-
-                <!-- Item 1 -->
-                <div class="destaque">
-                    <h3>Qualidade</h3>
-                    <p>Cafés selecionados com o melhor sabor.</p>
-                </div>
-
-                <!-- Item 2 -->
-                <div class="destaque">
-                    <h3>Ambiente</h3>
-                    <p>Espaço confortável para relaxar ou estudar.</p>
-                </div>
-
-                <!-- Item 3 -->
-                <div class="destaque">
-                    <h3>Rapidez</h3>
-                    <p>Atendimento ágil para o seu dia a dia.</p>
-                </div>
-
+            <div class="destaque">
+                <h3>Ambiente</h3>
+                <p>Espaço confortável para relaxar ou estudar.</p>
             </div>
-        </section>
 
-        <!-- ================= CHAMADA FINAL ================= -->
-        <section class="cta">
-            <h2>Venha nos visitar!</h2>
-            <p>Estamos abertos todos os dias das 08h às 22h.</p>
-        </section>
+            <div class="destaque">
+                <h3>Rapidez</h3>
+                <p>Atendimento ágil para o seu dia a dia.</p>
+            </div>
 
-    </main>
+        </div>
+    </section>
 
-    <!-- ================= RODAPÉ ================= -->
-    <footer class="rodape">
-        <p>®2026 Café Central. Todos os Direitos Reservados</p>
-        <p><a href="../pages/contato.html">Entre em Contato</a></p>
-    </footer>
+    <section class="cta">
+        <h2>Venha nos visitar!</h2>
+        <p>Estamos abertos todos os dias das 08h às 22h.</p>
+    </section>
 
-    <!-- JavaScript -->
-    <script src="../js/script.js"></script>
+</main>
+
+<footer class="rodape">
+    <p>®2026 Café Central. Todos os Direitos Reservados</p>
+   
+    <p><a href="pages/contato.html">Entre em Contato</a></p>
+</footer>
+<script src="js/script.js"></script>
 
 </body>
 </html>
