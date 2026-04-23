@@ -50,7 +50,7 @@ const sessionConfig = {
     secret: process.env.SESSION_SECRET, // chave secreta
     resave: false,
     
-    // 🔥 CORREÇÃO: estava "saveUnitialized"
+    // 
     saveUninitialized: false,
 
     name: "cafecentral.sid",
@@ -77,8 +77,7 @@ app.use(session(sessionConfig));
 
 // ================= CADASTRO =================
 
-// 🔥 CORREÇÃO: faltava "async"
-app.post("/mensagem", async (req, res) => {
+app.post("/cadastro", async (req, res) => {
     try {
         const { nome, email, senha } = req.body;
 
@@ -89,7 +88,7 @@ app.post("/mensagem", async (req, res) => {
 
         // Verifica se já existe usuário
         const [rows] = await pool.execute(
-            "SELECT id FROM tb_usuarios WHERE email=?", [email]
+            "SELECT id FROM tb_usuario WHERE email=?", [email]
         );
 
         if (rows.length > 0) {
@@ -101,7 +100,7 @@ app.post("/mensagem", async (req, res) => {
 
         // Salva no banco
         await pool.execute(
-            "INSERT INTO tb_usuarios(nome,email,senha) VALUES(?,?,?)",
+            "INSERT INTO tb_usuario(nome,email,senha) VALUES(?,?,?)",
             [nome, email, senhaHash]
         );
 
@@ -118,73 +117,63 @@ app.post("/mensagem", async (req, res) => {
 
 app.post("/login", async (req, res) => {
     try {
-        const { senha, email } = req.body;
-
-        if (!senha || !email) {
-            return res.status(400).json({ erro: "Preencha todos os campos" });
-        }
-
-        // Busca usuário
-        const [rows] = await pool.execute(
-            "SELECT id, nome, email, senha FROM tb_usuarios WHERE email=?", [email]
-        );
-
-        if (rows.length == 0) {
-            return res.status(401).json({ erro: "Usuário não encontrado" });
-        }
-
-        const usuario = rows[0];
-
-        // 🔥 CORREÇÃO: usar bcrypt correto
-        const senhaCorreta = await bcrypt.compare(senha, usuario.senha);
-
-        if (!senhaCorreta) {
-            return res.status(401).json({ erro: "Senha inválida" });
-        }
-
-        // Salva sessão
-        req.session.usuario = {
-            id: usuario.id,
-            nome: usuario.nome,
-            email: usuario.email
-        };
-
-        res.json({ mensagem: "Login realizado com sucesso!" });
-
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ erro: "Erro ao fazer login" });
+    const { email, senha } = req.body;
+    if (!email || !senha)
+    // verifica se algum campo está vazio
+    return res.status(400).json({ erro: "Preencha e-mail e senha." });
+    // retorna erro 400 (requisição inválida)
+    const [rows] = await pool.execute(
+  
+    "SELECT id, nome, email, senha FROM usuario WHERE email = ?", [email]
+    );
+    if (rows.length === 0)
+    // nenhum usuário encontrado com esse e-mail
+    return res.status(401).json({ erro: "Usuário não encontrado." });
+    // ERRO 401 = não autorizado
+    const usuario = rows[0];
+    // pega o primeiro (e único) resultado da consulta
+    const senhaCorreta = await bcrypt.compare(senha, usuario.senha);
+    // compara a senha digitada com o hash salvo no banco
+    if (!senhaCorreta)
+    // hashes diferentes = senha errada
+    return res.status(401).json({ erro: "Senha inválida." });
+    // ERRO 401 = não autorizado
+    req.session.usuario = {
+    id: usuario.id, // ID interno do usuário
+    nome: usuario.nome, // nome para exibir na interface
+    email: usuario.email // e-mail para referência futura
+    };
+    res.json({ mensagem: "Login realizado com sucesso." });
+    } catch {
+    res.status(500).json({ erro: "Erro ao fazer login." });
     }
 });
 
 
 // ================= VERIFICAR LOGIN =================
 
-app.get("/me", (req, res) => {
-
-    if (!req.session.usuario) {
-        return res.status(401).json({ logado: false });
-    }
-
-    // 🔥 CORREÇÃO: estava com ";" errado
-    res.json({
-        logado: true,
-        usuario: req.session.usuario
+app.get("/me", (req, res) => { 
+    if (!req.session.usuario) // se não há sessão salva...
+    return res.status(401) // responde com ERRO 401 (não autorizado)
+    .json({ logado: false }); // avisa que não está logado
+    res.json({ // se há sessão, responde com 200
+    logado: true, // confirma que está logado
+    usuario: req.session.usuario // devolve os dados do usuário (nome, email, id)
     });
 });
-
 
 // ================= LOGOUT =================
 
-app.post("/logout", (req, res) => {
-
-    req.session.destroy(() => {
-        res.clearCookie("cafecentral.sid");
-        res.json({ mensagem: "Logout realizado" });
+app.post("/logout", (req, res) => { // rota POST 4 o front chama para deslogar
+    req.session.destroy(() => { // apaga a sessão do servidor completamente
+    res.json({ // após destruir, responde com sucesso
+    mensagem: "Logout realizado." // confirmação para o front-end
+        });
     });
-
 });
-
+    app.listen(
+        process.env.PORT || 3000, () => console.log("Servidor rodando")
+        );
 
 // ================= SERVIDOR =================
 
