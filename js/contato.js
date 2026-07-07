@@ -1,7 +1,7 @@
 // Pega o formulário pelo ID
 const form = document.getElementById("formContato");
-const API_URL = "http://localhost:3000"
-//const API_URL = "https://cafe-central-rb0q.onrender.com"
+//const API_URL = "http://localhost:3000"
+const API_URL = "https://cafe-central-mc3h.onrender.com"
 
 // Escuta o evento de envio do formulário
 form.addEventListener("submit", async function(event){
