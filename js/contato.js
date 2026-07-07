@@ -17,7 +17,7 @@ form.addEventListener("submit", async function(event){
 
     try {
         // Envia os dados para um servidor (ou arquivo fake/API)
-        const resposta = await fetch(`${API_URL}/post`, {
+        const resposta = await fetch(`${API_URL}/contato`, {
             method: "POST", // tipo de envio
             headers: {
                 "Content-Type": "application/json" // diz que é JSON
@@ -35,7 +35,7 @@ form.addEventListener("submit", async function(event){
 
     } catch (erro) {
         // Caso dê erro
-        console.error(erro);
+        console.log(erro);
         alert("Erro ao enviar mensagem!");
     }
 });
