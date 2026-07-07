@@ -1,210 +1,145 @@
-// ================= IMPORTAÇÕES =================
-
-// Carrega variáveis do .env
 require("dotenv").config();
-
-// Importa o Express (framework do servidor)
 const express = require("express");
+const cors = require("cors"); 
+const session = require("express-session"); 
+const bcrypt = require("bcryptjs"); 
+const conexao = require("./db.js");
 
-// Permite requisições de outros domínios (frontend)
-const cors = require("cors");
-
-// Gerencia sessões (login)
-const session = require("express-session");
-
-// 🔥 CORREÇÃO: nome estava errado (bcrytjs → bcryptjs)
-const bcrypt = require("bcryptjs");
-
-// Conexão com banco de dados
-const pool = require("./db.js");
-
-// Cria o servidor
 const app = express();
 
+    const ListOrigins = [
+        "http://localhost:8080", 
+        "http://localhost:5500", 
+        "http://127.0.0.1:5500", 
+        "https://guilherme1601.github.io"
+    ];
+    app.use(cors({
+        origin: ListOrigins,
+        credentials: true,
+        methods: ["GET","POST","PUT","DELETE","OPTIONS"],
+        allowedHeaders: ["Content-Type","Authorization"]
+    }));
 
-// ================= CORS =================
-
-// Lista de sites permitidos acessar a API
-const listOrigins = [
-    "http://localhost:5500",
-    "http://127.0.0.1:5500",
-    "http://guilherme1601.github.io"
-];
-
-// Configuração do CORS
-app.use(cors({
-    origin: listOrigins,
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ["Content-Type", "Authorization"]
-}));
-
-
-// Permite receber JSON no body
+//configuração da API
 app.use(express.json());
+app.use(express.urlencoded({ extended: true}));
 
-
-// ================= SESSÃO =================
-
+// Configuração do COOKIE de sessão
 const sessionConfig = {
-    secret: process.env.SESSION_SECRET, // chave secreta
+    secret: process.env.SESSION_SECRET,
     resave: false,
-    
-    // 
     saveUninitialized: false,
-
-    name: "cafecentral.sid",
-
+    name: 'cafe-central.sid',
     cookie: {
-        httpOnly: true, // protege contra JS
-        maxAge: 1000 * 60 * 60 // 1 hora
+        httpOnly: true,
+        maxAge: 1000*60*60
     }
 };
 
-// Configuração para produção
-if (process.env.NODE_ENV == "production") {
-    app.set("trust proxy", 1);
-    sessionConfig.cookie.sameSite = "none";
+// Ambiente local X Produção
+if(process.env.NODE_ENV==="production"){
+ 
+    app.set("trust proxy",1); 
+    sessionConfig.cookie.sameSite="none"; 
     sessionConfig.cookie.secure = true;
 } else {
-    sessionConfig.cookie.sameSite = "lax";
+    sessionConfig.cookie.sameSite="lax"; 
     sessionConfig.cookie.secure = false;
-}
+};
 
-// Ativa sessão
 app.use(session(sessionConfig));
 
+//primeira Rota
 
-// ================= CADASTRO =================
-
-app.post("/cadastro", async (req, res) => {
-    try {
-        const { nome, email, senha } = req.body;
-
-        // Validação
-        if (!nome || !email || !senha) {
-            return res.status(400).json({ erro: "Preencha todos os campos" });
-        }
-
-        // Verifica se já existe usuário
-        const [rows] = await pool.execute(
-            "SELECT id FROM tb_usuario WHERE email=?", [email]
-        );
-
-        if (rows.length > 0) {
-            return res.status(409).json({ erro: "E-mail já cadastrado" });
-        }
-
-        // Criptografa senha
-        const senhaHash = await bcrypt.hash(senha, 10);
-
-        // Salva no banco
-        await pool.execute(
-            "INSERT INTO tb_usuario(nome,email,senha) VALUES(?,?,?)",
-            [nome, email, senhaHash]
-        );
-
-        res.status(201).json({ mensagem: "Cadastro realizado com sucesso!" });
-
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ erro: "Erro ao cadastrar usuário" });
-    }
+app.get("/",(req,res)=>{
+    res.send("API Cafe Central funcionando");
 });
 
+// rota cadastro
 
-// ================= LOGIN =================
-
-app.post("/login", async (req, res) => {
-    try {
-    const { email, senha } = req.body;
-    if (!email || !senha)
-    // verifica se algum campo está vazio
-    return res.status(400).json({ erro: "Preencha e-mail e senha." });
-    // retorna erro 400 (requisição inválida)
-    const [rows] = await pool.execute(
-  
-    "SELECT id, nome, email, senha FROM tb_usuario WHERE email = ?", [email]
-    );
-    if (rows.length === 0)
-    // nenhum usuário encontrado com esse e-mail
-    return res.status(401).json({ erro: "Usuário não encontrado." });
-    // ERRO 401 = não autorizado
-    const usuario = rows[0];
-    // pega o primeiro (e único) resultado da consulta
-    const senhaCorreta = await bcrypt.compare(senha, usuario.senha);
-    // compara a senha digitada com o hash salvo no banco
-    if (!senhaCorreta)
-    // hashes diferentes = senha errada
-    return res.status(401).json({ erro: "Senha inválida." });
-    // ERRO 401 = não autorizado
-    req.session.usuario = {
-    id: usuario.id, // ID interno do usuário
-    nome: usuario.nome, // nome para exibir na interface
-    email: usuario.email // e-mail para referência futura
-    };
-    res.json({ mensagem: "Login realizado com sucesso." });
-    } catch(error) {
-        console.error(error)
-    res.status(500).json({ erro: "Erro ao fazer login." });
-    }
-});
-
-
-// ================= VERIFICAR LOGIN =================
-
-app.get("/me", (req, res) => { 
-    if (!req.session.usuario) // se não há sessão salva...
-    return res.status(401) // responde com ERRO 401 (não autorizado)
-    .json({ logado: false }); // avisa que não está logado
-    res.json({ // se há sessão, responde com 200
-    logado: true, // confirma que está logado
-    usuario: req.session.usuario // devolve os dados do usuário (nome, email, id)
-    });
-});
-
-// ================= LOGOUT =================
-
-app.post("/logout", (req, res) => { // rota POST 4 o front chama para deslogar
-    req.session.destroy(() => { // apaga a sessão do servidor completamente
-    res.json({ // após destruir, responde com sucesso
-    mensagem: "Logout realizado." // confirmação para o front-end
-        });
-    });
-});
-    app.listen(
-        process.env.PORT || 3000, () => console.log("Servidor rodando")
-        );
-
-
-
-
-app.post("/post", (req,res) => {
-    // 7. req.body contém os dados envciados pelo form(nome,email,mensagem)
+app.post("/cadastro", async (req, res) =>{
     try{
-        const nome = req.body.nome
-        const email = req.body.email
-        const mensagem = req.body.mensagem
-                
+        const{nome,email,senha} = req.body
+        console.log(req.body);
+
+        if(!nome || !email || !senha){
+            return res.status(400).json({erro: "Preencha todos os campos"})
+        }
+
+        const [rows] = await conexao.execute(
+             "SELECT id FROM tb_usuarios WHERE email=?", [email]
+        );
+
+        if(rows.length>0){
+            return res.status(409).json({erro:"E-mail já cadastrado"})
+        };
+
+        const senhaHash = await bcrypt.hash(senha,10);
+
+        const sql = `INSERT INTO tb_usuarios (nome,email,senha) VALUES (?,?,?)`
+        conexao.execute(sql,[nome,email,senhaHash])
+        res.json({mensagem: "Usuário cadastrado com sucesso"}); 
+        
+    } catch(erro){
+        console.log(erro);
+        res.status(500).json({erro: "Erro ao cadastrar usuário!"})
+    }
+})
+
+// rota login
+app.post("/login",async (req,res)=>{
+    try{
+        const {email,senha} = req.body || {};
+        
+        if(!email || !senha){
+            return res.status(400).json({erro: "Preencha todos os campos"})
+        }
+
+        const sql = `SELECT * FROM tb_usuarios WHERE email=?`
+
+        const [resultado] = await conexao.execute(sql,[email])
+
+        if(resultado.length === 0){
+            return res.status(401).json({mensagem: "Usuário ou senha inválidos!"})
+        }
+
+        const usuario = resultado[0]    
+     
+        const senhaCorreta = await bcrypt.compare(senha,usuario.senha) 
+        
+        if(!senhaCorreta){
+            return res.status(401).json({erro: "Senha inválida"});
+        };
+    
+        res.json({mensagem: "Login realizado com sucesso!"});
+    
+    } catch(erro){
+        console.log("Erro no Login: ",erro)
+        res.status(500).json({erro: "Erro ao cadastrar usuário"})
+    }
+})
+
+// Rota de Contato
+app.post("/contato",async (req,res)=>{
+    try{
+        const {nome, email, mensagem} = req.body
+
         if(!nome || !email || !mensagem){
-        // codigo 400 - requisição inválida
-            return res.status(400).json({mensagem: "Preecha todos os campos"});
-            };
-        
-            pool.execute("INSERT INTO tb_mensagem(nome,email,mensagem) VALUES(?,?,?)", [nome,email,mensagem]);
-            // codigo 201 - criado com sucesso
-            res.status(201).json({mensagem: "Mensagem enviada com sucesso!"});
-        
-                // 8. Envia uma resposta de volta para o navegador
-            res.send("Mensagem recebida com sucesso!");
-            } catch(error){
-                console.error(error);
-            }
-        });
+            return res.status(400).json({erro: "Preencha todos os campos"});
+        }
 
+        const sql = `INSERT INTO tb_contato (nome,email,mensagem) VALUES(?,?,?)`
+                    
+        await conexao.execute(sql,[nome,email,mensagem])
+        res.json({mensagem: "Mensagem enviada com sucesso!"});
 
-// ================= SERVIDOR =================
+    } catch(erro){
+        res.status(500).json({erro:"Erro ao enviar mensagem"});
+    }
 
-app.listen(3000, () => {
-    console.log("Servidor rodando em http://localhost:3000");
-});
+})
+
+// Iniciando o Servidor na porta 3000
+app.listen(3000,()=>{
+    console.log("Servidor rodando na porta 3000");
+})
