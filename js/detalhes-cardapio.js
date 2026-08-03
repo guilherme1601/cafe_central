@@ -35,9 +35,9 @@ async function carregarDetalhesCardapio(){
 function mostrarItemCardapio(cardapio){
     mensagemCarregamento.textContent =  "";
     conteudoCardapio.innerHTML = `
-        <h3> ${cardapio.titulo} </h3>
-        <img src="${cardapio.img}" width="150" height="150">
-        <p> ${cardapio.desc} </p>
+       <h3 class="cardapiodetalhes">  ${cardapio.titulo} </h3>
+        <img class="detalhe-imagem" src="${cardapio.img}" width="150" height="150">
+        <p class="cardapio-desc"> ${cardapio.desc} </p>
         <div class="infobox"> <p class="infoLabel"> <strong></p> <p class="infoValor">Preço: </strong> ${cardapio.preco}</p> </div>
     `
 }

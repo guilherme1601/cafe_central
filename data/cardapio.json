@@ -10,7 +10,7 @@
 {
     "id": 2,
     "img":"../img/pao.jpg",
-    "titulo":"Pão Francês",
+    "titulo":"Pão Francês Feito na hora           ",
     "desc":"Crocrante por fora e macio por dentro, ideal com manteiga ou geleia.",
     "preco":"R$: 0,99"
 },
@@ -37,8 +37,8 @@
 },
 {
     "id": 6,
-    "img":"../img/queijopao.jpg",
-    "titulo":"Café Gelado",
+    "img":"../img/images.jpg",
+    "titulo":"Café Gelado com Gelo",
     "desc":"Perfeito para dias quentes, com café filtrado e gelo crocante.",
     "preco":"R$: 7,49"
 }

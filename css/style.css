@@ -112,6 +112,7 @@ nav.menu a:hover {
     gap: 20px;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
 }
 
 .produto {
@@ -230,12 +231,13 @@ footer a {
 /* PAGINA DE DETALHES DO CARDAPIO*/
 
 /* ====== PAGINA DE DETALHES DO CURSO ====== */
-.container-detalhe-curso {
+.cardapiodetalhes {
   padding-top: 40px;
   padding-bottom: 40px;
+  color: rgba(133, 67, 5, 0.815);
 }
 
-.detalhe-card {
+.detalhes-card {
   max-width: 900px;
   margin: 0 auto;
   padding: 25px;
@@ -269,18 +271,40 @@ footer a {
       margin-Bottom: 20px;
     }
 
-  .infoLabel {
-      color: #1a4db3;
+  .cardapio-desc {
+      color: rgba(133, 67, 5, 0.815);
       font-Weight: bold;
       font-Size: 20;
       margin-Bottom: 8;
       text-Align: center;
     }
 
-  .infoValor {
+  .infoBox p {
       color: #222;
-      font-Size: 16;
+      font-Size: 24;
       line-Height: 24;
       text-Align: acenter;
       margin-Bottom: 20;
     }
+  
+  .btn_cardapio {
+      background-Color: rgba(133, 67, 5, 0.815);
+      align-Items: center;  
+      color: #fff;
+      padding: 10px 20px;
+      border-Radius: 8px;
+      text-Decoration: none;
+      border: none;
+      cursor: pointer;
+    }  
+
+  .produto {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}  
+
+  
+
