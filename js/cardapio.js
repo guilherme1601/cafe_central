@@ -1,6 +1,6 @@
 // Seleciona o elemento onde os produtos do cardápio vão aparecer
 const ListaCardapio = document.querySelector("#ListaCardapio");
-const BuscaCardapio = document.querySelector("#BuscaCardapio");
+//const BuscaCardapio = document.querySelector("#BuscaCardapio");
 
 // Cria um array vazio para armazenar os dados do cardápio
 let cardapio = [];
@@ -35,8 +35,8 @@ function renderizarCardapio(lista) {
         card.innerHTML = `
         <img src="${item.img}" width="100" height="140">
         <h3>${item.titulo}</h3>
-        <p>${item.desc}</p>
-        <p><strong>Preço:</strong> ${item.preco}</p>
+        <a href="detalhes-cardapio.html?id=${item.id}"><button class="btn_cardapio">Ver detalhes</button></a>
+
         `;
 
         // Adiciona o card dentro da lista na página

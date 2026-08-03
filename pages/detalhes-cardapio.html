@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
     <head>
-        <title>Cardápio</title>
+        <title>Destalhes Cardápio</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../css/style.css">
@@ -19,31 +19,25 @@
                 <a href="../pages/login.html">Login</a>
             </nav>
         </header>
-        <main>
+    <!-- Conteúdo da página -->
+        <main class="container-detalhe-cardapio">
+            <p id="mensagemCarregamento">
+                carregando informações do cardapio
+            </p>
 
-            <section class="Cardapio">
-
-                <h2>Cardápio do Café Central</h2>
-
-                <p>
-                    Sabores quentes e fresquinhos para começar bem o dia. 
-                    Aproveite nossos cafés especiais, lanches artesanais e opções de acompanhamento.
-                </p>
-
-                <div class="cardapio-grid" id="ListaCardapio" >
-
-                </div>
-
-            </section>
-        
+            <article id="conteudoCardapio" class="detalhe-card">
+                <!-- Dados do carapio.js -->
+            </article>
         </main>
 
-        <footer class="rodape">
+
+
+    <footer class="rodape">
             <p>&copy; 2026 Café Central. Todos os direitos reservados</p>
             <p><a href="../pages/contato.html">Entre em Contato</a></p>
         </footer>
 
-        <script src="../js/cardapio.js"></script>
+        <script src="../js/detalhes-cardapio.js"></script>
 
     </body>
 </html>

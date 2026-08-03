@@ -225,3 +225,62 @@ footer a {
     color: rgba(10, 8, 0, 0.788);
     text-decoration: none;
 }
+
+
+/* PAGINA DE DETALHES DO CARDAPIO*/
+
+/* ====== PAGINA DE DETALHES DO CURSO ====== */
+.container-detalhe-curso {
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
+.detalhe-card {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 25px;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  background-color: #fff;
+  border-radius: 10px;
+  flex-direction: column;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.detalhe-imagem {
+  width: 300px;
+  height: 250px;
+  border-radius: 9px;
+  object-fit: contain;
+}
+
+ .infoBox {
+      Background-Color: #f5f5f5;
+      padding: 15px;
+      width: 500px;
+      height: 150px;
+      border-radius: 8px;
+      margin-Bottom: 20px;
+      gap: 12px;
+    }
+
+  .secaoDetalhe {
+      margin-Bottom: 20px;
+    }
+
+  .infoLabel {
+      color: #1a4db3;
+      font-Weight: bold;
+      font-Size: 20;
+      margin-Bottom: 8;
+      text-Align: center;
+    }
+
+  .infoValor {
+      color: #222;
+      font-Size: 16;
+      line-Height: 24;
+      text-Align: acenter;
+      margin-Bottom: 20;
+    }

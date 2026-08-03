@@ -1,36 +1,42 @@
 [
 
 {
+    "id": 1,
     "img":"../img/cafee.png",
     "titulo":"Expresso Clássico",
     "desc":"Intenso, encorpado e preparado com grãos selecionados para um sabor marcante.",
     "preco":"R$: 4,99"
 },
 {
+    "id": 2,
     "img":"../img/pao.jpg",
-    "titulo":"Pão Francês Fresquinho",
+    "titulo":"Pão Francês",
     "desc":"Crocrante por fora e macio por dentro, ideal com manteiga ou geleia.",
     "preco":"R$: 0,99"
 },
 {
+    "id": 3,
     "img":"../img/queijopao.jpg",
     "titulo":"Pão de Queijo Artesanal",
     "desc":"Recheado com queijo especial e assado na hora, mais sabor para o seu café.",
     "preco":"R$: 0,99"
 },
 {
+    "id": 4,
     "img":"../img/cafee.png",
     "titulo":"Café com Leite",
     "desc":"Equilíbrio perfeito entre café espresso e leite vaporizado, suave e cremoso.",
     "preco":"R$: 6,49"
 },
 {
+    "id": 5,
     "img":"../img/pao.jpg",
     "titulo":"Torrada com Manteiga",
     "desc":"Fatias douradas servidas com manteiga artesanal, simples e deliciosa.",
     "preco":"R$: 2,49"
 },
 {
+    "id": 6,
     "img":"../img/queijopao.jpg",
     "titulo":"Café Gelado",
     "desc":"Perfeito para dias quentes, com café filtrado e gelo crocante.",
