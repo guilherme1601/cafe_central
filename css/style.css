@@ -20,7 +20,7 @@ main {
 }
 
 h1, h2, h3 {
-    color: #8B5E3C;;
+    color: rgb(95, 80, 48);
     text-align: center;
 }
 
@@ -44,7 +44,7 @@ header {
 }
 
 .logo span {
-    color: #C48400;
+    color: rgba(177, 136, 3, 0.788);
 }
 
 nav.menu {
@@ -59,7 +59,7 @@ nav.menu a {
 }
 
 nav.menu a.ativo {
-    color: #FFFFFF;
+    color: rgba(177, 136, 3, 0.788);
     text-decoration: underline;
 }
 
@@ -74,7 +74,7 @@ nav.menu a:hover {
 }
 
 .hero h1 {
-    font-size: 26px;
+    font-size: 36px;
     color: burlywood;
 }
 
