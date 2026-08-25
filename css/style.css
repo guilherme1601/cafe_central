@@ -20,13 +20,13 @@ main {
 }
 
 h1, h2, h3 {
-    color: rgb(95, 80, 48);
+    color: #804E1D);
     text-align: center;
 }
 
 p {
     line-height: 1.5;
-    margin: 10px 0;
+    margin: 20px 0;
     text-align: center;
 }
 
@@ -44,7 +44,7 @@ header {
 }
 
 .logo span {
-    color: rgba(177, 136, 3, 0.788);
+    color: rgba(228, 180, 24, 0.945);
 }
 
 nav.menu {
@@ -59,7 +59,7 @@ nav.menu a {
 }
 
 nav.menu a.ativo {
-    color: rgba(177, 136, 3, 0.788);
+    color: #e6b71fc9;
     text-decoration: underline;
 }
 
@@ -223,7 +223,7 @@ footer {
 }
 
 footer a {
-    color: rgba(10, 8, 0, 0.788);
+    color: rgba(255, 255, 255, 0.788);
     text-decoration: none;
 }
 
@@ -234,7 +234,7 @@ footer a {
 .cardapiodetalhes {
   padding-top: 40px;
   padding-bottom: 40px;
-  color: rgba(133, 67, 5, 0.815);
+  color: #ffffff;
 }
 
 .detalhes-card {
@@ -304,7 +304,4 @@ footer a {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-}  
-
-  
-
+}
