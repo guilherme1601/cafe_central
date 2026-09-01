@@ -22,6 +22,11 @@ if(formCadastro){
             return
         }
 
+        if (senha.length < 6){
+            mensagem.textContent = "A senha deve ter no mínimo 6 caracteres";
+            return
+        }
+
         // ENVIO PARA O SERVIDOR/BANCO E RESPOSTA
         try{
             // POST com corpo em JSON
