@@ -3,6 +3,42 @@ const form = document.getElementById("formContato");
 //const API_URL = "http://localhost:3000"
 const API_URL = "https://cafe-central-mc3h.onrender.com"
 
+if(form){
+    form.addEventListener("submit", async function(event){
+        event.preventDefault(); // previne que a página recarregue
+
+        // Captura cada campo do form
+        const nome = document.getElementById("nome").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const mensagem = document.getElementById("mensagem").value.trim();
+
+        const mensagems = document.getElementById("mensagems");
+        mensagems.textContent=""; // Limpa mensagem anterior   
+
+        // Campo vazio -> interromper
+        if(!nome || !email || !mensagem ){
+            mensagems.textContent = "Preencha os campos";
+            return
+        }
+        if (mensagem.length < 10){
+            mensagems.textContent = "A mensagem deve ter no mínimo 10 caracteres";
+            return
+        }
+        if (nome.length < 3){
+            mensagems.textContent = "O nome deve ter no mínimo 3 caracteres";
+            return
+        }
+        if (!email.includes("@")){
+            mensagems.textContent = "Digite um email válido";
+            return
+        }
+        if (!email.includes(".")){
+            mensagems.textContent = "Digite um email válido";
+            return
+        }
+    });
+}
+
 // Escuta o evento de envio do formulário
 form.addEventListener("submit", async function(event){
     event.preventDefault(); // impede a página de recarregar
