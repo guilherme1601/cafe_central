@@ -82,6 +82,21 @@ if(formLogin){
             mensagem.textContent = "Preencha os campos";
             return
         }
+
+        if (senha.length < 6){
+            mensagem.textContent = "A senha deve ter no mínimo 6 caracteres";
+            return
+        }
+
+        if (!email.includes("@")){
+            mensagem.textContent = "Digite um email válido";
+            return
+        }
+
+        if (!email.includes(".")){
+            mensagem.textContent = "Digite um email válido";
+            return
+        }
         
 
         // ENVIO PARA O SERVIDOR/BANCO E RESPOSTA
