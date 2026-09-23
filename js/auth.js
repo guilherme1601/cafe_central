@@ -22,26 +22,6 @@ if(formCadastro){
             return
         }
 
-        if(!email.includes("@")){
-            mensagem.textContent = "Digite um Email válido";
-            return
-        }
-
-        if(!email.includes(".com")){
-            mensagem.textContent = "Digite um Email válido";
-            return
-        }
-
-        if (senha.length < 6){
-            mensagem.textContent = "A senha deve ter no mínimo 6 caracteres";
-            return
-        }
-
-        else if(/\d/.test(nome)){
-            mensagem.textContent = "O nome não pode conter números";
-            return
-        }
-
         // ENVIO PARA O SERVIDOR/BANCO E RESPOSTA
         try{
             // POST com corpo em JSON
@@ -95,25 +75,6 @@ if(formLogin){
         // Campo vazio -> interromper
         if(!email || !senha){
             mensagem.textContent = "Preencha os campos";
-            return
-        }
-
-        if (senha.length < 6){
-            mensagem.textContent = "A senha deve ter no mínimo 6 caracteres";
-            return
-        }
-
-        else if(/\d/.test(nome)){
-            mensagem.textContent = "O nome não pode conter números";
-            return
-        }
-        if (!email.includes("@")){
-            mensagem.textContent = "Digite um email válido";
-            return
-        }
-
-        if (!email.includes(".com")){
-            mensagem.textContent = "Digite um email válido";
             return
         }
         
