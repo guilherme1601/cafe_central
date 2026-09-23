@@ -1,83 +1,102 @@
+
 // Pega o formulário pelo ID
-const formcontato = document.getElementById("formContato");
-//const API_URL = "http://localhost:3000"
-const API_URL = "https://cafe-central-mc3h.onrender.com"
+const formContato = document.getElementById("formContato");
 
-if(formcontato){
-    formcontato.addEventListener("submit", async function(event){
-        event.preventDefault(); // previne que a página recarregue
+// URL da API
+// const API_URL = "http://localhost:3000";
+const API_URL = "https://cafe-central-mc3h.onrender.com";
 
-        // Captura cada campo do form
+// Verifica se o formulário existe
+if (formContato) {
+
+    // Evento de envio do formulário
+    formContato.addEventListener("submit", async function(event) {
+
+        // Impede a página de recarregar
+        event.preventDefault();
+
+        // Captura os valores dos campos
         const nome = document.getElementById("nome").value.trim();
         const email = document.getElementById("email").value.trim();
         const mensagem = document.getElementById("mensagem").value.trim();
 
-        const mensagems = document.getElementById("mensagems");
-        mensagems.textContent=""; // Limpa mensagem anterior   
+        // Pega o campo de mensagem de status
+        const msgStatus = document.getElementById("msgStatus");
 
-        // Campo vazio -> interromper
-        if(!nome || !email || !mensagem ){
-            mensagems.textContent = "Preencha os campos";
-            return
-        }
-        if (mensagem.length < 10){
-            mensagems.textContent = "A mensagem deve ter no mínimo 10 caracteres";
-            return
-        }
+        // Limpa mensagem anterior
+        msgStatus.textContent = "";
 
-        else if(/\d/.test(nome)){
-            mensagems.textContent = "O nome não pode conter números";
-            return
+        // Verifica campos vazios
+        if (!nome || !email || !mensagem) {
+            msgStatus.textContent = "Preencha os campos";
+            return;
         }
 
-        if (nome.length < 3){
-            mensagems.textContent = "O nome deve ter no mínimo 3 caracteres";
-            return
+        // Verifica tamanho do nome
+        if (nome.length < 3) {
+            msgStatus.textContent = "O nome deve ter no mínimo 3 caracteres";
+            return;
         }
-        if (!email.includes("@")){
-            mensagems.textContent = "Digite um email válido";
-            return
+
+        // Verifica se o nome possui números
+        if (/\d/.test(nome)) {
+            msgStatus.textContent = "O nome não pode conter números";
+            return;
         }
-        if (!email.includes(".com")){
-            mensagems.textContent = "Digite um email válido";
-            return
+
+        // Verifica tamanho da mensagem
+        if (mensagem.length < 10) {
+            msgStatus.textContent = "A mensagem deve ter no mínimo 10 caracteres";
+            return;
+        }
+
+        // Verifica o email
+        if (!email.includes("@") || !email.includes(".")) {
+            msgStatus.textContent = "Digite um email válido";
+            return;
+        }
+
+        // Cria o objeto com os dados
+        const novaMensagem = {
+            nome: nome,
+            email: email,
+            mensagem: mensagem
+        };
+
+        try {
+
+            // Envia os dados para a API
+            const resposta = await fetch(`${API_URL}/contato`, {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify(novaMensagem)
+            });
+
+            // Verifica se a API retornou erro
+            if (!resposta.ok) {
+                throw new Error(`Erro HTTP: ${resposta.status}`);
+            }
+
+            // Converte a resposta para JSON
+            const dados = await resposta.json();
+
+            console.log("Enviado:", dados);
+
+            // Mostra mensagem de sucesso
+            msgStatus.textContent = "Mensagem enviada com sucesso!";
+
+            // Limpa o formulário
+            formContato.reset();
+
+        } catch (erro) {
+
+            console.error("Erro ao enviar:", erro);
+
+            msgStatus.textContent = "Erro ao enviar mensagem!";
         }
     });
 }
-
-// Escuta o evento de envio do formulário
-form.addEventListener("submit", async function(event){
-    event.preventDefault(); // impede a página de recarregar
-
-    // Pega os valores digitados nos inputs
-    const nome = document.getElementById("nome").value;
-    const email = document.getElementById("email").value;
-    const mensagem = document.getElementById("mensagem").value;
-
-    // Cria um objeto com os dados
-    const novaMensagem = { nome, email, mensagem };
-
-    try {
-        // Envia os dados para um servidor (ou arquivo fake/API)
-        const resposta = await fetch(`${API_URL}/contato`, {
-            method: "POST", // tipo de envio
-            headers: {
-                "Content-Type": "application/json" // diz que é JSON
-            },
-            body: JSON.stringify(novaMensagem) // transforma em JSON
-        });
-
-        // Converte a resposta
-        const dados = await resposta.json();
-
-        console.log("Enviado:", dados);
-
-        alert("Mensagem enviada com sucesso!");
-        form.reset(); // limpa o formulário
-
-    } catch (erro) {
-        // Caso dê erro
-        console.log(erro);
-        alert("Erro ao enviar mensagem!");
-    }
-});
